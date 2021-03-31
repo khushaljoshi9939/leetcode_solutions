@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int height(TreeNode* node) 
+{ 
+    if (node == NULL) 
+        return 0; 
+    else
+    { 
+        /* compute the height of each subtree */
+        int lheight = height(node->left); 
+        int rheight = height(node->right); 
+ 
+        /* use the larger one */
+        if (lheight > rheight) 
+            return(lheight + 1); 
+        else return(rheight + 1); 
+    }
+        
+}
+        
+    vector<vector<int>> levelOrder(TreeNode* root)
+    {
+       
+        vector<vector<int>> ans;
+        if(root==NULL) return ans;
+        
+        int h=height(root);
+        ans.resize(h);
+        for(int i=1;i<=h;i++)
+            hello(i,ans,root,i);
+            
+        return ans;
+    }
+        
+    void hello(int level,vector<vector<int>> & x,TreeNode *root,int vect)
+    {
+        if (root == NULL) 
+        return; 
+        if(level==1)
+        {
+            x[vect-1].push_back(root->val);
+        }
+        else
+        {
+            hello(level-1,x,root->left,vect);
+            hello(level-1,x,root->right,vect);
+        }
+    }
+        
+}
