@@ -1,0 +1,31 @@
+class Solution {
+    List<Integer> al=new ArrayList<>();
+       
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int j=0;
+        
+       for(int i=0;i<m;i++){
+           if(j<n){
+           if(nums1[i]<nums2[j]){
+               continue;
+           }else
+           {
+               for(int k=m;k>i;k--){
+                   nums1[k]=nums1[k-1];
+               }
+               nums1[i]=nums2[j];
+               m++;
+               j++;
+            }
+           }
+       }
+    
+        int i=m;
+      for(;j<n;j++){
+          nums1[i]=nums2[j];
+          i++;
+      }
+      
+    }
+
+}
