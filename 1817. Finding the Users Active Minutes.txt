@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> findingUsersActiveMinutes(vector<vector<int>>& logs, int k) {
+        map<int,set<int>> uniq;
+        vector<int> uam(k,0);
+        
+        for(auto i=0;i<logs.size();i++)
+        {
+            uniq[logs[i][0]].insert(logs[i][1]);
+        }
+        
+        long count=0;
+        for(auto m:uniq)
+        {
+            
+            uam[uniq[m.first].size()-1]++;
+            
+        }
+        
+        return uam;
+    }
+};
