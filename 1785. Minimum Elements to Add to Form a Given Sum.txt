@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int minElements(vector<int>& nums, int limit, int goal) {
+        long long sum=0;
+        long long e=0;
+        
+        for(auto i=0;i<nums.size();i++)
+        {
+            sum+=nums[i];
+        }
+        
+        
+        if(sum==goal) return e;
+        
+        
+        long long ad=limit;
+        long long d;
+        while(sum!=goal)
+        {   
+            if((sum-goal)<0)
+            {
+                if(abs(sum-goal)<=limit)
+                {
+                    sum+=abs(sum-goal);
+                    e++;
+                }
+                else{
+                    d=abs(sum-goal)/limit;
+                    sum+=(d*limit);
+                    e+=d;
+                }
+            }
+            else {
+                  if(abs(sum-goal)<=limit)
+                {
+                    sum-=abs(sum-goal);
+                    e++;
+                }
+                else{
+                    d=abs(sum-goal)/limit;
+                    sum-=(d*limit);
+                    e+=d;
+                }
+            }         
+    }
+        return e;
+    }
+};
