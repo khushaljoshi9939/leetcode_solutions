@@ -1,0 +1,26 @@
+class Solution {
+public:
+    unordered_map<string,string> hm;
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl) {
+        string encodedStr = "http://tinyurl.com/"+generateRandom(6);
+        hm[encodedStr] = longUrl;
+        return encodedStr;
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl) {
+        return hm[shortUrl];
+    }
+    
+    string generateRandom(int size) {
+        char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        int l = sizeof(alphanum);
+        srand(time(NULL));
+        string result;
+        for(int i = 0; i < size; i++) {
+            result += alphanum[rand()%(l-1)];
+        }
+        return result;
+    }
+};
