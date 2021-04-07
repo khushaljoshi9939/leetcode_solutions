@@ -1,0 +1,56 @@
+class Solution {
+public:
+    vector<vector<int>> result;//final result...to be returned
+    
+    void printPath(const vector<int> &path)
+    {
+        result.push_back(path);
+        return;
+    }
+
+    // Function to perform DFS traversal in a directed graph to find the
+    // complete path between source and destination vertices
+    void dfs(const vector<vector<int>> &edges, int src, int dest,
+		    vector<bool> &discovered, vector<int> &path)
+    {
+	    // mark current node as discovered
+	    discovered[src] = true;
+
+	    // include current node in the path
+	    path.push_back(src);
+
+	    // print the complete path if destination vertex is found
+	    if (src == dest)
+		    printPath(path);
+
+	    // do for every edge (src -> i)
+	    for (int i: edges[src])
+		    // proceed if u is not discovered
+		    if (!discovered[i]) 
+			    dfs(edges, i, dest, discovered, path);
+		
+	    // backtrack: remove current node from the path & mark it as not discovered
+	    path.pop_back();
+	    discovered[src] = false;
+    }
+
+    //main function
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& edges) {
+    int N = edges.size();
+
+	// stores vertex is discovered or not
+    vector<bool> discovered(N);
+
+	// source and destination vertex
+    int src = 0, dest = N-1;
+
+	// vector to store the complete path between source and destination
+	vector<int> path;
+        
+	// perform DFS traversal from the source vertex to check the connectivity
+	// and print all paths from the source vertex to the destination vertex
+	dfs(edges, src, dest, discovered, path);
+        
+    return result;
+    }
+};
